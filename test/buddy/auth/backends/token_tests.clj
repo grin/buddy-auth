@@ -17,7 +17,7 @@
 (defn make-request
   [token]
   (let [header (format "Token %s" token)]
-    {:headers {"auThorIzation" header}}))
+    {:headers {"X-auThorIzation" header}}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tests: parse
@@ -47,7 +47,7 @@
   [data secret]
   (let [header (->> (jws/sign data secret)
                     (format "Token %s"))]
-    {:headers {"authorization" header}}))
+    {:headers {"x-authorization" header}}))
 
 (deftest jws-tests
   (testing "Jws token backend authentication"
@@ -135,7 +135,7 @@
   [data secret]
   (let [header (->> (jwe/encrypt data secret)
                     (format "Token %s"))]
-    {:headers {"authorization" header}}))
+    {:headers {"x-authorization" header}}))
 
 (deftest jwe-backend-test
   (testing "Jwe token backend authentication"

@@ -27,7 +27,7 @@
 
 (defn- parse-authorization-header
   [request token-name]
-  (some->> (http/get-header request "authorization")
+  (some->> (http/get-header request "x-authorization")
            (re-find (re-pattern (str "^" token-name " (.+)$")))
            (second)))
 
